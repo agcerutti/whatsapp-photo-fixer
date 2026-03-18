@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Entornos virtuales
+venv/
+.env/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Qt / UI compilados (si usás pyuic)
+ui_*.py
+
+# Logs o temporales
+*.log
+
+# Archivos grandes de prueba
+test_images/
+output/
