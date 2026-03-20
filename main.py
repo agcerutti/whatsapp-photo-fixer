@@ -2,14 +2,14 @@ import sys
 import os
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog
 from PyQt5 import uic
+from datetime import datetime
 
 from core.processor import procesar_imagenes
-
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-
+        # Carga de la grafica
         uic.loadUi("main.ui", self)
 
         self.carpeta = None
@@ -19,30 +19,37 @@ class MainWindow(QMainWindow):
         self.btnProcesar.clicked.connect(self.procesar)
 
     def seleccionar_carpeta(self):
+        '''Obtiene la ruta de la carpeta que contiene las imagenes a procesar'''
         carpeta = QFileDialog.getExistingDirectory(self, "Seleccionar carpeta")
-
-        if carpeta:
+        # Si existe la carpeta, muestra su ubicacion
+        if carpeta: 
             self.carpeta = carpeta
             self.lblRuta.setText(carpeta)
-            self.txtLog.append(f"📂 Carpeta seleccionada:\n{carpeta}")
+            self.txtLog.append(f"\n 📂 Carpeta seleccionada:\n{carpeta}")
 
     def procesar(self):
+        '''Realiza el cambio de parametros informando tanto en log como en la progress bar'''
+        # Si no hay carpeta definida, da aviso
         if not self.carpeta:
             self.txtLog.append("⚠️ Seleccioná una carpeta primero")
             return
-
+        # Crea una carpeta donde se colocaran las imagenes procesadas
         carpeta_salida = os.path.join(self.carpeta, "output")
 
-        self.txtLog.append("🚀 Iniciando procesamiento...\n")
-        self.progressBar.setValue(0)
-
         def log(msg):
-            self.txtLog.append(msg)
+            '''log de eventos con timestamp'''
+            ahora = datetime.now().strftime("%H:%M:%S")
+            self.txtLog.append(f"[{ahora}] {msg}")
+            self.txtLog.ensureCursorVisible()
             QApplication.processEvents()
 
         def progress(val):
+            '''progreso de la barra de progreso'''
             self.progressBar.setValue(val)
             QApplication.processEvents()
+
+        log("🚀 Iniciando procesamiento...")
+        self.progressBar.setValue(0)
 
         procesar_imagenes(
             self.carpeta,
@@ -51,8 +58,7 @@ class MainWindow(QMainWindow):
             progress_callback=progress
         )
 
-        self.txtLog.append("\n🎉 Proceso finalizado")
-
+        log("🎉 Proceso finalizado")
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

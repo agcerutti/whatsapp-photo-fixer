@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>519</width>
-    <height>568</height>
+    <height>524</height>
    </rect>
   </property>
   <property name="font">
@@ -89,8 +89,15 @@
       <layout class="QHBoxLayout" name="horizontalLayout_4">
        <item>
         <widget class="QProgressBar" name="progressBar">
+         <property name="font">
+          <font>
+           <weight>50</weight>
+           <bold>false</bold>
+           <stylestrategy>PreferAntialias</stylestrategy>
+          </font>
+         </property>
          <property name="value">
-          <number>24</number>
+          <number>0</number>
          </property>
         </widget>
        </item>
