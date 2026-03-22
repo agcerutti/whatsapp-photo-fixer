@@ -61,7 +61,13 @@
        <item>
         <widget class="QPushButton" name="btnSeleccionar">
          <property name="text">
-          <string>Select</string>
+          <string/>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>16</width>
+           <height>16</height>
+          </size>
          </property>
         </widget>
        </item>
@@ -72,16 +78,9 @@
        <item>
         <widget class="QPushButton" name="btnProcesar">
          <property name="text">
-          <string>Process</string>
+          <string/>
          </property>
         </widget>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_5">
-       <item>
-        <widget class="QTextEdit" name="txtLog"/>
        </item>
       </layout>
      </item>
@@ -100,6 +99,13 @@
           <number>0</number>
          </property>
         </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_5">
+       <item>
+        <widget class="QTextEdit" name="txtLog"/>
        </item>
       </layout>
      </item>
